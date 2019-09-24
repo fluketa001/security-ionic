@@ -1,24 +1,67 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu type="overlay">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
-                {{p.title}}
-              </ion-label>
+    <ion-split-pane>
+        <ion-menu type="overlay">
+            <ion-header no-border>
+                <ion-toolbar>
+                    <ion-item>
+                        <ion-avatar slot="start" style="width:25%;height: 25%;margin-top:20px;">
+                            <img src="/assets/img/male-avatar.png">
+                        </ion-avatar>
+                        <ion-label class="color">
+                            <h2><b>เก่งกวี อึ้งรัตนวงษ์</b></h2>
+                            <h4>I'm a big deal</h4>
+                        </ion-label>
+                    </ion-item>
+                    <ion-row padding>
+                        <ion-col>
+                            <ion-button size="small">
+                                <ion-icon name="contact"></ion-icon> Edit Profile
+                            </ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button size="small" href="/login">
+                                <ion-icon name="contact"></ion-icon> Log Out
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-toolbar>
+            </ion-header>
+            <!--
+            <ion-item style="height: 150px;background-image: url(/assets/img/gradients.jpg);">
+                <ion-avatar slot="start" style="width:20%;height: 20%;">
+                    <img src="/assets/img/male-avatar.png">
+                </ion-avatar>
+                <ion-label class="color">
+                    <h2><b>เก่งกวี อึ้งรัตนวงษ์</b></h2>
+                    <h4>I'm a big deal</h4>
+                </ion-label>
             </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
-  </ion-split-pane>
+            -->
+            <ion-content>
+                <ion-list>
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                        <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+                            <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                            <ion-label>
+                                {{p.title}}
+                            </ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ion-list>
+                <hr>
+                <ion-list>
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p2 of setting">
+                        <ion-item [routerDirection]="'root'" [routerLink]="[p2.url]">
+                            <ion-icon slot="start" [name]="p2.icon"></ion-icon>
+                            <ion-label>
+                                {{p2.title}}
+                            </ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ion-list>
+            </ion-content>
+            <hr>
+        </ion-menu>
+        <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane>
 </ion-app>

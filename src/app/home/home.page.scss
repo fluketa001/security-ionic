@@ -1,4 +1,32 @@
 .welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+    max-height: 35vh;
+    overflow: hidden;
+}
+
+ion-toolbar {
+    //--ion-background-color: black;
+    --background: url(/assets/img/p2.jpg) no-repeat center center fixed;
+    padding-bottom: 30px;
+    color: white;
+}
+
+
+/*.searchbar-input {
+    background: #FFF !important;
+    border-radius: 30px !important;
+    height: 45px !important;
+    max-width: 400px;
+    font-size: 1.25em !important;
+    border: 1px solid transparent;
+}*/
+
+hr {
+    //border: 2px solid red !important;
+    height: 2px !important;
+    width: 100% !important;
+    background: gray !important;
+    display: block !important;
+    font-size: 2em !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }

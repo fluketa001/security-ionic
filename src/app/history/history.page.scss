@@ -1,0 +1,17 @@
+hr {
+    //border: 2px solid red !important;
+    height: 2px !important;
+    width: 100% !important;
+    background: white !important;
+    display: block !important;
+    font-size: 2em !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+ion-toolbar {
+    //--ion-background-color: black;
+    --background: url(/assets/img/p2.jpg) no-repeat center center fixed;
+    padding-bottom: 30px;
+    color: white;
+}

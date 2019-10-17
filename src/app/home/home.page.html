@@ -7,42 +7,64 @@
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-searchbar search-icon="" placeholder="ทะเบียนรถ"></ion-searchbar>
+    <ion-searchbar search-icon="" placeholder="ทะเบียนรถ" style="text-align: center;" [(ngModel)]="lecenseplate" autocomplete (keyup)='search($event)'></ion-searchbar>
     <ion-item style="padding:0px 8px 0px 8px;">
-        <ion-label>เข้าพบห้อง :</ion-label>
-        <ion-input placeholder="เลขที่บ้าน/เลขยูนิต" style="text-align: right;"></ion-input>
+        <ion-label>สถานะ :</ion-label>
+        <ion-input style="text-align: right;" [(ngModel)]="status" [readonly]="true"></ion-input>
+    </ion-item>
+    <ion-item style="padding:0px 8px 0px 8px;">
+        <ion-label>ห้อง :</ion-label>
+        <ion-input placeholder="เลขที่บ้าน/เลขยูนิต" style="text-align: right;" [(ngModel)]="description" value="{{data_room}}" [readonly]="variable"></ion-input>
     </ion-item>
     <ion-item style="padding:0px 8px 0px 8px;margin-bottom:15px;">
         <ion-label>บันทึกสถานะรถ :</ion-label>
-        <ion-select value="in" okText="ตกลง" cancelText="ยกเลิก">
+        <ion-select okText="ตกลง" cancelText="ยกเลิก" [(ngModel)]="inout" disabled="false">
             <ion-select-option value="in">รถเข้า</ion-select-option>
             <ion-select-option value="out">รถออก</ion-select-option>
         </ion-select>
     </ion-item>
-    <ion-button class="style-button" expand="block">บันทึกข้อมูล</ion-button>
+    <ion-button class="style-button" expand="block" (click)="save()">บันทึกข้อมูล</ion-button>
     <hr>
 
-    <ion-card style="margin:0px 0px 0px 0px;">
-        <ion-list lines="none">
-            <ion-list-header>
-                <ion-label>รถที่ยังอยู่ในโครงการ</ion-label>
-            </ion-list-header>
-            <ion-item href="https://ionicframework.com/docs/">
-                <ion-icon slot="start" color="medium" name="book"></ion-icon>
-                <ion-label>Ionic Documentation</ion-label>
-            </ion-item>
-            <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-                <ion-icon slot="start" color="medium" name="build"></ion-icon>
-                <ion-label>Scaffold Out Your App</ion-label>
-            </ion-item>
-            <ion-item href="https://ionicframework.com/docs/layout/structure">
-                <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-                <ion-label>Change Your App Layout</ion-label>
-            </ion-item>
-            <ion-item href="https://ionicframework.com/docs/theming/basics">
-                <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-                <ion-label>Theme Your App</ion-label>
-            </ion-item>
-        </ion-list>
-    </ion-card>
+    <font align="center">
+        <h5>รถที่ยังอยู่ภายในโครงการ</h5>
+    </font>
+    <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [columns]="columns" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [limit]="10" style="margin-top:10px;" [scrollbarH]="true">
+        <ngx-datatable-column name="licenseplate" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>ทะเบียนรถ</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="description" [width]="115" [resizeable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>ห้อง/ยูนิตที่มาพบ</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="carin">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>วันเวลาเข้า</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="time" [width]="230" [resizeable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>ระยะเวลา</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <div style="text-align: center;">
+            <ngx-datatable-column name="over">
+                <ng-template ngx-datatable-header-template>
+                    <span>ค่าใช้จ่าย</span>
+                </ng-template>
+            </ngx-datatable-column>
+        </div>
+    </ngx-datatable>
+
 </ion-content>

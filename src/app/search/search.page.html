@@ -5,7 +5,7 @@
         </ion-buttons>
         <label>ค้นหาข้อมูล</label>
     </ion-toolbar>
-    <ion-searchbar padding placeholder="ทะเบียนรถ/ชื่อ-สกุล/บ้านเลขที่/เลขยูนิต/เบอร์โทร" style="margin-bottom:10px;position: absolute;z-index: 999;margin-top:-40px;"></ion-searchbar>
+    <ion-searchbar padding placeholder="ทะเบียนรถ/ชื่อ-สกุล/บ้านเลขที่/เลขยูนิต/เบอร์โทร" style="margin-bottom:10px;position: absolute;z-index: 999;margin-top:-40px;" (keyup)='filterDatatable($event)'></ion-searchbar>
 </ion-header>
 <ion-content padding>
     <!--<label style="color: white;">ค้นหาข้อมูล</label>
@@ -14,4 +14,26 @@
     <div align="center">
         <label style="color: white;">ผลการค้นหา</label>
     </div>-->
+    <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
+        <ngx-datatable-column name="ทะเบียนรถ" [width]="75" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.licenseplate}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ชื่อ-สกุล">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.name}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="เลขที่บ้าน/เลขยูนิต">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.homenumber}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="เบอร์โทร">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.telephone}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
 </ion-content>

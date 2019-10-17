@@ -5,12 +5,12 @@
 
     <div style="margin-bottom:20px;">
         <ion-label position="floating" color="light">Username:</ion-label>
-        <ion-input class="style-input" placeholder="ชื่อผู้ใช้งาน"></ion-input>
+        <ion-input class="style-input" type="text" placeholder="ชื่อผู้ใช้งาน" [(ngModel)]="username"></ion-input>
     </div>
 
     <div style="margin-bottom:20px;">
         <ion-label position="floating" color="light">Password:</ion-label>
-        <ion-input class="style-input" placeholder="รหัสผ่าน"></ion-input>
+        <ion-input class="style-input" type="password" placeholder="รหัสผ่าน" [(ngModel)]="pass"></ion-input>
     </div>
     <!--<ion-item>
               <ion-label position="floating" color="light">Username:</ion-label>
@@ -20,5 +20,5 @@
               <ion-label position="floating" color="light">Password:</ion-label>
               <ion-input type="password"></ion-input>
           </ion-item>-->
-    <ion-button href="/select" routerDirection="root" expand="block" style="font-weight: bold;border-radius: 15px;">เข้าสู่ระบบ</ion-button>
+    <ion-button routerDirection="root" expand="block" style="font-weight: bold;border-radius: 15px;" (click)="login()">เข้าสู่ระบบ</ion-button>
 </ion-content>

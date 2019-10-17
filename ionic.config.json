@@ -1,5 +1,7 @@
 {
   "name": "security",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

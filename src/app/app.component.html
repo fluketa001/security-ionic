@@ -5,22 +5,22 @@
                 <ion-toolbar>
                     <ion-item>
                         <ion-avatar slot="start" style="width:25%;height: 25%;margin-top:20px;">
-                            <img src="/assets/img/male-avatar.png">
+                            <img src="{{gender}}">
                         </ion-avatar>
                         <ion-label class="color">
-                            <h2><b>เก่งกวี อึ้งรัตนวงษ์</b></h2>
-                            <h4>I'm a big deal</h4>
+                            <h2><b>{{name}}</b></h2>
+                            <h4>{{status}}</h4>
                         </ion-label>
                     </ion-item>
                     <ion-row padding>
                         <ion-col>
-                            <ion-button size="small">
-                                <ion-icon name="contact"></ion-icon> Edit Profile
+                            <ion-button size="small" href="/profile">
+                                <ion-icon name="contact" style="margin-right:3px;"></ion-icon>Edit Profile
                             </ion-button>
                         </ion-col>
                         <ion-col>
-                            <ion-button size="small" href="/login">
-                                <ion-icon name="contact"></ion-icon> Log Out
+                            <ion-button size="small" (click)="logout()">
+                                <ion-icon name="log-out" style="margin-right:3px;"></ion-icon>Log Out
                             </ion-button>
                         </ion-col>
                     </ion-row>
@@ -50,11 +50,11 @@
                 </ion-list>
                 <hr>
                 <ion-list>
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p2 of setting">
-                        <ion-item [routerDirection]="'root'" [routerLink]="[p2.url]">
-                            <ion-icon slot="start" [name]="p2.icon"></ion-icon>
+                    <ion-menu-toggle auto-hide="false">
+                        <ion-item [routerDirection]="'root'" (click)="change()">
+                            <ion-icon slot="start" name="md-albums"></ion-icon>
                             <ion-label>
-                                {{p2.title}}
+                                เปลี่ยนโครงการ
                             </ion-label>
                         </ion-item>
                     </ion-menu-toggle>

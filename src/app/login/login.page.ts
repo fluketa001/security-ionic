@@ -46,6 +46,8 @@ export class LoginPage implements OnInit {
         // set a key/value
         this.storage.set('id', data.json()[1].dbresult[0].id);
         this.storage.set('name', data.json()[1].dbresult[0].name);
+        this.storage.set('telephone', data.json()[1].dbresult[0].telephone);
+        this.storage.set('address', data.json()[1].dbresult[0].address);
         this.storage.set('status', data.json()[1].dbresult[0].status);
         this.storage.set('gender', data.json()[1].dbresult[0].gender);
         this.storage.set('picture', data.json()[1].dbresult[0].picture);

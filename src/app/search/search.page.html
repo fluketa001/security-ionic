@@ -30,6 +30,11 @@
                 {{row.homenumber}}
             </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="สถานะ">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.status}}
+            </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="เบอร์โทร">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.telephone}}

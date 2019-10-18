@@ -17,17 +17,17 @@
         <!-- Inputs with labels -->
         <ion-item>
             <ion-icon ios="ios-contact" md="md-contact" style="margin-right: 10px;font-size: 34px;"></ion-icon>
-            <ion-input placeholder="ชื่อ - นามสกุล"></ion-input>
+            <ion-input placeholder="ชื่อ - นามสกุล" [(ngModel)]="name"></ion-input>
         </ion-item>
 
         <!-- Inputs with labels -->
         <ion-item>
             <ion-icon ios="ios-call" md="md-call" style="margin-right: 10px;font-size: 34px;"></ion-icon>
-            <ion-input placeholder="เบอร์โทรศัพท์"></ion-input>
+            <ion-input placeholder="เบอร์โทรศัพท์" [(ngModel)]="telephone"></ion-input>
         </ion-item>
         <!-- Textarea in an item with a placeholder -->
         <ion-item>
-            <ion-textarea placeholder="ที่อยู่ปัจจุบัน" rows="5"></ion-textarea>
+            <ion-textarea placeholder="ที่อยู่ปัจจุบัน" rows="5" [(ngModel)]="address"></ion-textarea>
         </ion-item>
         <ion-button expand="block" style="font-weight: bold;border-radius:5px;" (click)="edit()">บันทึก</ion-button>
     </div>

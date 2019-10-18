@@ -33,6 +33,7 @@ export class AppComponent {
   name:any;
   status:any;
   gender:any;
+  picture:any;
 
   constructor(
     private platform: Platform,
@@ -61,13 +62,7 @@ export class AppComponent {
       console.log('Your gender is', val);
     });
     this.storage.get('picture').then((val) => {
-      if(val == ""){
-        if(this.gender == "male"){
-          this.gender = "/assets/img/male-avatar.png";
-        }else if(this.gender == "female"){
-          this.gender = "/assets/img/female-avatar.png";
-        }
-      }
+      this.picture = val;
     });
   }
 

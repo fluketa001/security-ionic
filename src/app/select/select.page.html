@@ -3,7 +3,7 @@
         <ion-row justify-content-center style="height: 100%; flex-direction: column">
             <div *ngFor="let item of items">
                 <ion-card class="style-button" (click)="select(item.id)" href="/home">
-                    <img src="/assets/img/sere.jpg" height="130">
+                    <img src="https://edmkk.com/img/{{item.picture}}" height="130">
                     <ion-card-content class="card-content">
                         {{item.name}}
                     </ion-card-content>

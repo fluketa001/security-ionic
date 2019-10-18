@@ -40,15 +40,7 @@ export class ProfilePage {
       console.log('Your gender is', val);
     });
     this.storage.get('picture').then((val) => {
-      if(val == ""){
-        if(this.gender == "male"){
-          this.gender = "/assets/img/male-avatar.png";
-        }else if(this.gender == "female"){
-          this.gender = "/assets/img/female-avatar.png";
-        }
-      }else{
-        this.picture = "";
-      }
+      this.picture = val;
     });
    }
 

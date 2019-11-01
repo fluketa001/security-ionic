@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 @NgModule({
   imports: [
+    AutoCompleteModule,
     CommonModule,
     FormsModule,
     IonicModule,

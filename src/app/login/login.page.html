@@ -10,7 +10,7 @@
 
     <div style="margin-bottom:20px;">
         <ion-label position="floating" color="light">Password:</ion-label>
-        <ion-input class="style-input" type="password" placeholder="รหัสผ่าน" [(ngModel)]="pass"></ion-input>
+        <ion-input class="style-input" type="password" placeholder="รหัสผ่าน" [(ngModel)]="pass" (keyup.enter)="login()"></ion-input>
     </div>
     <!--<ion-item>
               <ion-label position="floating" color="light">Username:</ion-label>

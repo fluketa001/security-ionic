@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Http,ResponseOptions,Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
-import { empty } from 'rxjs';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { map } from 'rxjs/operators';
+import {Observable, of, empty} from 'rxjs';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +21,7 @@ export class HomePage {
   temp = [];
   dataIn = [];
   resident = [];
+  autocomplete = [];
 
   lecenseplate:any;
   description:any;
@@ -29,16 +33,37 @@ export class HomePage {
   status:any = "ผู้มาติดต่อ";
   data_room:any = "";
   variable:any;
+
+  isItemAvailable:any;
+  items:any;
+  array = [];
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  constructor(private storage: Storage, private router: Router, public alertController: AlertController,private http: Http) {
+  constructor(private storage: Storage, private router: Router, public alertController: AlertController,private http: Http, public keyboard : Keyboard) {
     this.storage.get('key').then((val) => {
       console.log('Your key is', val);
       this.getInout(val);
       this.val = val;
         this.getResident(val);
     });
+    this.isItemAvailable = false; // initialize the items with false
+  }
+
+  getAutoComplete(val){
+    let headers = new Headers({'Content-Type':'application/json'});
+    let options = new ResponseOptions({headers:headers});
+    let body = {enterprise_id:val};   
+    this.http.post('https://edmkk.com/service/getAutoComplete.php',body,options)
+    .subscribe(data=>{
+      if(data.json()[0]){
+        this.autocomplete = data.json()[0].dbresult;
+      }else{
+        this.autocomplete = [];
+      }
+    },error=>{
+      console.log("error");
+    })
   }
 
   getInout(val){
@@ -92,8 +117,14 @@ export class HomePage {
     })
   }
 
+  initializeItems(){ 
+      //this.items = ["มข789","ทร2222", "dravid"]; 
+  }
+
   search(event){
     const val = event.target.value.toLowerCase();
+    this.getAutoComplete(this.val);
+
     this.getResident(this.val);
     // filter our data
     const resident = this.resident.filter(function(d) {
@@ -117,6 +148,76 @@ export class HomePage {
     //this.rows = temp;
     // Whenever the filter changes, always go back to the first page
     //this.table.offset = 0;
+    // Reset items back to all of the items
+    this.initializeItems();
+    this.array = [];
+    for(let i=0;i<this.autocomplete.length;i++){
+      this.array.push(this.autocomplete[i].licenseplate);
+    }
+    // if the value is an empty string don't filter the itemsง
+    console.log(this.array);
+    if (val && val.trim() != '') {
+      this.isItemAvailable = true;
+      this.items = this.array.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }else{
+      this.isItemAvailable = false;
+    }
+    
+  }
+  checkFocus(event){
+    const val = event.target.value.toLowerCase();
+    this.getAutoComplete(this.val);
+    this.initializeItems();
+    this.array = [];
+    for(let i=0;i<this.autocomplete.length;i++){
+      this.array.push(this.autocomplete[i].licenseplate);
+    }
+    // if the value is an empty string don't filter the itemsง
+    console.log(this.array);
+    if (val && val.trim() != '') {
+      this.isItemAvailable = true;
+      this.items = this.array.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }else{
+      this.isItemAvailable = false;
+    }
+  }
+
+  /*checkBlur(){
+    this.isItemAvailable = false;
+  }*/
+  show(){
+    this.keyboard.show();
+  }
+
+  closeCursor(){
+    this.isItemAvailable = false;
+  }
+
+  select(item){
+    this.lecenseplate = item;
+    this.isItemAvailable = false;
+    this.getResident(this.val);
+    // filter our data
+    const resident = this.resident.filter(function(d) {
+      return d.licenseplate.toLowerCase().indexOf(item) !== -1 || !item;
+    });
+
+    this.getInout(this.val);
+    // filter our data
+    const inout = this.dataIn.filter(function(e) {
+      return e.licenseplate.toLowerCase().indexOf(item) !== -1 || !item;
+    });
+
+    if(resident > []){
+      this.chkRes(resident,item);
+    }
+    if(inout > []){
+    this.chkIn(inout,item);
+    }
   }
 
   chkRes(resident,val){    
@@ -134,13 +235,13 @@ export class HomePage {
   }
 
   chkIn(inout,val){
+    console.log(inout[0].id);
 
     if(inout[0].licenseplate == val){
       this.inout = "out";
       this.data_room = inout[0].description;
       this.variable = "true";
-      this.dataid = this.dataIn[0].id;
-      console.log(this.dataIn[0].id);
+      this.dataid = inout[0].id;
     }else{
       this.inout = "in";
       this.data_room = "";

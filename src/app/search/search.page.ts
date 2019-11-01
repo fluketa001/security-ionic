@@ -3,6 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Http,ResponseOptions,Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
   selector: 'app-search',
@@ -19,11 +20,18 @@ export class SearchPage implements OnInit {
 
   resident = [];
 
-  constructor(private storage: Storage, public alertController: AlertController,private http: Http) {
+  constructor(private storage: Storage, public alertController: AlertController,private http: Http, private callNumber: CallNumber) {
     this.storage.get('key').then((val) => {
       console.log('Your key is', val);
         this.getResident(val);
     });
+   }
+
+  tel(number){
+    console.log(number);
+    this.callNumber.callNumber(number, true)
+    .then(res => console.log('Launched dialer!', res))
+    .catch(err => console.log('Error launching dialer', err));
    }
  
   ngOnInit() {

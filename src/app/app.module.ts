@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Http,ResponseOptions,Headers, HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,8 +25,10 @@ import { IonicStorageModule } from '@ionic/storage';
   ],
   providers: [
     StatusBar,
+    Keyboard,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    CallNumber
   ],
   bootstrap: [AppComponent]
 })

@@ -7,7 +7,16 @@
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-searchbar search-icon="" placeholder="ทะเบียนรถ" style="text-align: center;" [(ngModel)]="lecenseplate" autocomplete (keyup)='search($event)'></ion-searchbar>
+    <ion-searchbar search-icon="" placeholder="ทะเบียนรถ" style="text-align: center;" [(ngModel)]="lecenseplate" autocomplete (keyup)='search($event)' (ionBlur)="checkBlur()" (ionFocus)="checkFocus($event)" (keyup.enter)="closeCursor()"></ion-searchbar>
+    <ion-card class="filter">
+        <ion-list *ngIf="isItemAvailable">
+            <div *ngFor="let item of items">
+                <ion-item (click)="select(item)">
+                    <ion-icon ios="ios-clock" md="md-clock" style="margin-right: 10px;"></ion-icon> {{ item }}
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-card>
     <ion-item style="padding:0px 8px 0px 8px;">
         <ion-label>สถานะ :</ion-label>
         <ion-input style="text-align: right;" [(ngModel)]="status" [readonly]="true"></ion-input>
@@ -23,6 +32,21 @@
             <ion-select-option value="out">รถออก</ion-select-option>
         </ion-select>
     </ion-item>
+    <ion-row style="text-align: center;">
+        <ion-col size="6">
+            <img src="/assets/img/car_bg_text.png" (click)="SuccessAlert()">
+        </ion-col>
+        <ion-col size="6">
+            <img src="/assets/img/bike_bg_text.png" (click)="SuccessAlert()">
+        </ion-col>
+        <ion-col size="3">
+        </ion-col>
+        <ion-col size="6">
+            <img src="/assets/img/delivery_bg_text.png" (click)="SuccessAlert()">
+        </ion-col>
+        <ion-col size="3">
+        </ion-col>
+    </ion-row>
     <ion-button class="style-button" expand="block" (click)="save()">บันทึกข้อมูล</ion-button>
     <hr>
 

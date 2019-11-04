@@ -5,7 +5,18 @@
         </ion-buttons>
         <label>ประวัติการจอดรถ</label>
     </ion-toolbar>
-    <ion-searchbar padding placeholder="ทะเบียนรถ/ชื่อ-สกุล/บ้านเลขที่/เลขยูนิต/เบอร์โทร" style="margin-bottom:10px;position: absolute;z-index: 999;margin-top:-40px;" (keyup)='filterDatatable($event)'></ion-searchbar>
+    <ion-item style="margin-bottom:30px;padding-left:15px;padding-right:15px;z-index: 999;margin-top:-40px;background: url(/assets/img/p2.jpg) no-repeat center center fixed;">
+        <ion-label>ค้นหาข้อมูลโดย</ion-label>
+        <ion-select [(ngModel)]="select" (ionChange)="onChange()">
+            <ion-select-option value="smart" selected>Smart Search</ion-select-option>
+            <ion-select-option value="date">วันที่</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-searchbar padding placeholder="ทะเบียนรถ/ชื่อ-สกุล/บ้านเลขที่/เลขยูนิต/เบอร์โทร" style="margin-bottom:10px;position: absolute;z-index: 999;margin-top:-40px;" (keyup)='filterDatatable($event)' [hidden]="smart"></ion-searchbar>
+    <ion-item style="margin-top:-30px;padding-left:15px;padding-right:15px;" [hidden]="date">
+        <ion-label>เลือกวันที่</ion-label>
+        <ion-datetime displayFormat="DD-MM-YYYY" placeholder="Select Date" [(ngModel)]="changedate" (ionChange)="onChangeDate(changedate)"></ion-datetime>
+    </ion-item>
 </ion-header>
 <ion-content padding>
     <!--<label style="color: white;">ค้นหาข้อมูล</label>
@@ -18,6 +29,20 @@
         <ngx-datatable-column name="ทะเบียนรถ" [width]="75" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.licenseplate}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="cartype" [width]="105" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>ชนิดรถ</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="status" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>สถานะ</span>
+                </div>
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="ห้อง/ยูนิตที่มาพบ">

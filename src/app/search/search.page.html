@@ -15,9 +15,11 @@
         <label style="color: white;">ผลการค้นหา</label>
     </div>-->
     <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
-        <ngx-datatable-column name="ทะเบียนรถ" [width]="75" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="เบอร์โทร" [width]="120">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.licenseplate}}
+                <a (click)="tel(row.telephone)">
+                    <ion-icon name="call"></ion-icon> {{row.telephone}}
+                </a>
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="ชื่อ-สกุล">
@@ -30,16 +32,29 @@
                 {{row.homenumber}}
             </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="ทะเบียนรถ" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.licenseplate}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="จังหวัด" [width]="120" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.province}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="สีรถ" [width]="100" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.color}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ชนิดรถ" [width]="115" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cartype}}
+            </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="สถานะ">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.status}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="เบอร์โทร">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <a (click)="tel(row.telephone)">
-                    <ion-icon name="call"></ion-icon> {{row.telephone}}
-                </a>
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>

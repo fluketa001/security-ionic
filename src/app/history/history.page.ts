@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Http,ResponseOptions,Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-history',
   templateUrl: './history.page.html',
@@ -14,18 +14,56 @@ export class HistoryPage implements OnInit {
   title = 'angular-datatables';
   rows = [];
   temp = [];
+  date:any;
+  smart:any;
+  select:any = "smart";
+  changedate:any;
+  val:any;
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   inout_all = [];
   constructor(private storage: Storage, public alertController: AlertController,private http: Http) {
+    this.smart = null;
+    this.date = "true";
     this.storage.get('key').then((val) => {
       console.log('Your key is', val);
+        this.val = val;
         this.getInout_all(val);
     });
   }
 
   ngOnInit() {
+  }
+
+  onChange(){
+    if(this.select == "smart"){
+      this.smart = null;
+      this.date = "true";
+      this.getInout_all(this.val);
+      console.log(this.smart);
+    }else{
+      this.smart = "true";
+      this.date = null;
+      this.changedate = null;
+      this.rows = [];
+      console.log(this.date);
+    }
+  }
+
+  onChangeDate(changedate){
+    console.log(moment(changedate).format('DD-MM-YYYY'));
+    const val = moment(changedate).format('DD-MM-YYYY');
+
+    // filter our data
+    const inout_all = this.inout_all.filter(function(d) {
+      return d.carin.toLowerCase().indexOf(val) !== -1 || !val || d.carout.toLowerCase().indexOf(val) !== -1 || d.description.toLowerCase().indexOf(val) !== -1 || d.licenseplate.toLowerCase().indexOf(val) !== -1;
+    });
+
+    // update the rows
+    this.rows = inout_all;
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
   }
 
   getInout_all(val){

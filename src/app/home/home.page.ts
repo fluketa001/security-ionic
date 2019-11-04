@@ -250,21 +250,16 @@ export class HomePage {
     }
   }
 
-  
-  save(){
-    console.log(this.lecenseplate);
-    console.log(this.description);
-    console.log(this.inout);
+save_car(){
     if(this.lecenseplate == null || this.description == null || this.inout == null){
       this.ErrorAlert();
     }else{
       if(this.inout == "in"){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
-        let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val};   
+        let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val,status:this.status,car_type:'รถยนต์'};   
         this.http.post('https://edmkk.com/service/saveInout.php',body,options)
         .subscribe(data=>{
-          console.log(data);
           if(data){
             this.SuccessAlert();
             this.lecenseplate = null;
@@ -284,7 +279,99 @@ export class HomePage {
         let body = {id:this.dataid};   
         this.http.post('https://edmkk.com/service/updateInout.php',body,options)
         .subscribe(data=>{
-          console.log(data);
+          if(data){
+            this.SuccessAlert();
+            this.lecenseplate = null;
+            this.description = null;
+            this.inout = "in";
+            this.getInout(this.val);
+          }else{
+            // ข้อความแจ้งเตือน
+            //this.ErrorAlert();
+          }
+        },error=>{
+          console.log("error");
+        })        
+      }
+    }
+  }
+   
+save_bike(){
+    if(this.lecenseplate == null || this.description == null || this.inout == null){
+      this.ErrorAlert();
+    }else{
+      if(this.inout == "in"){
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new ResponseOptions({headers:headers});
+        let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val,status:this.status,car_type:'รถจักรยานยนต์'};   
+        this.http.post('https://edmkk.com/service/saveInout.php',body,options)
+        .subscribe(data=>{
+          if(data){
+            this.SuccessAlert();
+            this.lecenseplate = null;
+            this.description = null;
+            this.inout = "in";
+            this.getInout(this.val);
+          }else{
+            // ข้อความแจ้งเตือน
+            //this.ErrorAlert();
+          }
+        },error=>{
+          console.log("error");
+        })
+      }else{
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new ResponseOptions({headers:headers});
+        let body = {id:this.dataid};   
+        this.http.post('https://edmkk.com/service/updateInout.php',body,options)
+        .subscribe(data=>{
+          if(data){
+            this.SuccessAlert();
+            this.lecenseplate = null;
+            this.description = null;
+            this.inout = "in";
+            this.getInout(this.val);
+          }else{
+            // ข้อความแจ้งเตือน
+            //this.ErrorAlert();
+          }
+        },error=>{
+          console.log("error");
+        })        
+      }
+    }
+  }
+
+   
+save_special(){
+    if(this.lecenseplate == null || this.description == null || this.inout == null){
+      this.ErrorAlert();
+    }else{
+      if(this.inout == "in"){
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new ResponseOptions({headers:headers});
+        let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val,status:this.status,car_type:'รถบริการพิเศษ'};   
+        this.http.post('https://edmkk.com/service/saveInout.php',body,options)
+        .subscribe(data=>{
+          if(data){
+            this.SuccessAlert();
+            this.lecenseplate = null;
+            this.description = null;
+            this.inout = "in";
+            this.getInout(this.val);
+          }else{
+            // ข้อความแจ้งเตือน
+            //this.ErrorAlert();
+          }
+        },error=>{
+          console.log("error");
+        })
+      }else{
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new ResponseOptions({headers:headers});
+        let body = {id:this.dataid};   
+        this.http.post('https://edmkk.com/service/updateInout.php',body,options)
+        .subscribe(data=>{
           if(data){
             this.SuccessAlert();
             this.lecenseplate = null;

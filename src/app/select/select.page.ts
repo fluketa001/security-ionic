@@ -14,7 +14,6 @@ export class SelectPage implements OnInit {
   public items: Array<any>;
   id:any;
   constructor(public menuCtrl: MenuController, private storage: Storage, private router: Router,private http: Http) {
-    this.ionViewWillEnter(); 
       /*setInterval(function(){ 
         this.ionViewWillEnter(); 
       }, 5000);*/
@@ -31,7 +30,7 @@ export class SelectPage implements OnInit {
       let body = {id:this.id};   
       this.http.post('https://edmkk.com/service/getEnterprise.php',body,options)
       .subscribe(data=>{
-        this.items = [data.json()[0].dbresult[0]];
+        this.items = data.json()[0].dbresult;
         console.log(this.items[0]);
       },error=>{
         console.log("error");

@@ -34,20 +34,20 @@
     </ion-item>
     <ion-row style="text-align: center;">
         <ion-col size="6">
-            <img src="/assets/img/car_bg_text.png" (click)="SuccessAlert()">
+            <img src="/assets/img/car_bg_text.png" (click)="save_car()">
         </ion-col>
         <ion-col size="6">
-            <img src="/assets/img/bike_bg_text.png" (click)="SuccessAlert()">
+            <img src="/assets/img/bike_bg_text.png" (click)="save_bike()">
         </ion-col>
         <ion-col size="3">
         </ion-col>
         <ion-col size="6">
-            <img src="/assets/img/delivery_bg_text.png" (click)="SuccessAlert()">
+            <img src="/assets/img/delivery_bg_text.png" (click)="save_special()">
         </ion-col>
         <ion-col size="3">
         </ion-col>
     </ion-row>
-    <ion-button class="style-button" expand="block" (click)="save()">บันทึกข้อมูล</ion-button>
+    <!--<ion-button class="style-button" expand="block" (click)="save()">บันทึกข้อมูล</ion-button>-->
     <hr>
 
     <font align="center">
@@ -58,6 +58,20 @@
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ทะเบียนรถ</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="cartype" [width]="105" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>ชนิดรถ</span>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="status" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template ngx-datatable-header-template>
+                <div style="text-align: center;">
+                    <span>สถานะ</span>
                 </div>
             </ng-template>
         </ngx-datatable-column>

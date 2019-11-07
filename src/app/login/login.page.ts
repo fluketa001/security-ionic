@@ -20,6 +20,10 @@ export class LoginPage implements OnInit {
     this.menuCtrl.enable(false);
   }
 
+  goto(Password){
+    Password.setFocus();
+  }
+
   /*this.films = this.httpClient.get('https://swapi.co/api/films');
     this.films
     .subscribe(data => {

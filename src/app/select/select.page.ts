@@ -13,6 +13,12 @@ export class SelectPage implements OnInit {
 
   public items: Array<any>;
   id:any;
+
+  public enableSound = true;
+  private clickSound = new Audio("data:audio/mpeg;base64,//sQxAAAA+i5OrQRABC9mG+3BCAACCAH/f//yE5z0Od/yf//ITnO853/O9CEIygAgEPg+8AAUWCwVioVCAEBgAAD/65xat0KnkqrfOEKkxfjOI6H//Ofpf/q8jZTBgc8uM4jcsMMMMH/+xLEAgAE6M1XGCKAAAAANIOAAAQIAADL6BfAW9DeJCI78xlb/EWEVL/6REV//0Uw0SMb//AY4ypMQU1FMy45OS4zqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqo="
+  );
+  public soundEnabled = true;
+
   constructor(public menuCtrl: MenuController, private storage: Storage, private router: Router,private http: Http) {
       /*setInterval(function(){ 
         this.ionViewWillEnter(); 
@@ -44,12 +50,16 @@ export class SelectPage implements OnInit {
   sqlload(){
   }
 
-  select(key){
-    // set a key/value
+  select(key,name){
+    // set a key/value.
     this.storage.set('key', key);
+    this.storage.set('name_enterprise', name);
     //this.router.navigateByUrl('/home');
+    /*this.router.navigate(['/home'])
+    .then(() => {
+      window.location.reload();
+    });*/
   }
-
   ngOnInit() {
   }
 

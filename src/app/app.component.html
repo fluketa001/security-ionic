@@ -8,6 +8,7 @@
                             <img src="https://edmkk.com/img/{{picture}}">
                         </ion-avatar>
                         <ion-label class="color">
+                            <h3><b>{{name_enterprise}}</b></h3>
                             <h3><b>{{name}}</b></h3>
                             <h4>{{status}}</h4>
                         </ion-label>
@@ -19,7 +20,7 @@
                             </ion-button>
                         </ion-col>
                         <ion-col>
-                            <ion-button size="small" (click)="logout()">
+                            <ion-button size="small" (click)="logout()" (click)="fnClick()">
                                 <ion-icon name="log-out" style="margin-right:3px;"></ion-icon>Log Out
                             </ion-button>
                         </ion-col>
@@ -40,7 +41,7 @@
             <ion-content>
                 <ion-list>
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-                        <ion-item [routerDirection]="root" [routerLink]="[p.url]">
+                        <ion-item [routerDirection]="root" [routerLink]="[p.url]" (click)="fnClick()">
                             <ion-icon slot="start" [name]="p.icon"></ion-icon>
                             <ion-label>
                                 {{p.title}}
@@ -51,7 +52,7 @@
                 <hr>
                 <ion-list>
                     <ion-menu-toggle auto-hide="false">
-                        <ion-item [routerDirection]="root" (click)="change()">
+                        <ion-item [routerDirection]="root" (click)="change()" (click)="fnClick()">
                             <ion-icon slot="start" name="md-albums"></ion-icon>
                             <ion-label>
                                 เปลี่ยนโครงการ

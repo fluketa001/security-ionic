@@ -2,12 +2,15 @@
     <ion-grid style="height: 100%">
         <ion-row justify-content-center style="height: 100%; flex-direction: column">
             <div *ngFor="let item of items">
-                <ion-card class="style-button" (click)="select(item.id)" href="/home">
-                    <img src="https://edmkk.com/img/{{item.picture}}" height="130">
-                    <ion-card-content class="card-content">
-                        {{item.name}}
-                    </ion-card-content>
-                </ion-card>
+                <div class="ion-activatable">
+                    <ion-card class="style-button" (click)="select(item.id,item.name)" href="/home">
+                        <img src="https://edmkk.com/img/{{item.picture}}" height="130">
+                        <ion-card-content class="card-content">
+                            {{item.name}}
+                        </ion-card-content>
+                    </ion-card>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
             </div>
             <!--
             <ion-card class="style-button" (click)="select(1)" href="/home">

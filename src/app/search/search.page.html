@@ -15,7 +15,7 @@
         <label style="color: white;">ผลการค้นหา</label>
     </div>-->
     <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
-        <ngx-datatable-column name="เบอร์โทร" [width]="120">
+        <ngx-datatable-column name="เบอร์โทร">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <a (click)="tel(row.telephone)">
                     <ion-icon name="call"></ion-icon> {{row.telephone}}
@@ -32,12 +32,12 @@
                 {{row.homenumber}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="ทะเบียนรถ" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="ทะเบียนรถ" [width]="120" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.licenseplate}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="จังหวัด" [width]="120" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="จังหวัด" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.province}}
             </ng-template>
@@ -47,7 +47,7 @@
                 {{row.color}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="ชนิดรถ" [width]="115" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="ชนิดรถ" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.cartype}}
             </ng-template>

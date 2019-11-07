@@ -1,16 +1,16 @@
 <ion-content padding>
-    <div align="center"><img src="assets/img/logo2.png" style="width:50%;margin-top:20%;"></div>
+    <div align="center"><img src="assets/img/680185.png" style="width:50%;margin-top:20%;"></div>
 
     <ion-card-title style="text-align: center;font-family: Verdana, Geneva, Tahoma, sans-serif;font-weight: bold;color: white;margin-bottom:10px;">LOGIN</ion-card-title>
 
     <div style="margin-bottom:20px;">
         <ion-label position="floating" color="light">Username:</ion-label>
-        <ion-input class="style-input" type="text" placeholder="ชื่อผู้ใช้งาน" [(ngModel)]="username"></ion-input>
+        <ion-input class="style-input" type="tel" placeholder="ชื่อผู้ใช้งาน" [(ngModel)]="username" (keyup.enter)="goto(Password)"></ion-input>
     </div>
 
     <div style="margin-bottom:20px;">
         <ion-label position="floating" color="light">Password:</ion-label>
-        <ion-input class="style-input" type="password" placeholder="รหัสผ่าน" [(ngModel)]="pass" (keyup.enter)="login()"></ion-input>
+        <ion-input class="style-input" #Password type="tel" placeholder="รหัสผ่าน" [(ngModel)]="pass" (keyup.enter)="login()" style="-webkit-text-security:disc"></ion-input>
     </div>
     <!--<ion-item>
               <ion-label position="floating" color="light">Username:</ion-label>
@@ -20,5 +20,5 @@
               <ion-label position="floating" color="light">Password:</ion-label>
               <ion-input type="password"></ion-input>
           </ion-item>-->
-    <ion-button routerDirection="root" expand="block" style="font-weight: bold;border-radius: 15px;" (click)="login()">เข้าสู่ระบบ</ion-button>
+    <ion-button routerDirection="root" expand="block" style="font-weight: bold;border-radius: 15px;height: 55px;" (click)="login()">เข้าสู่ระบบ</ion-button>
 </ion-content>

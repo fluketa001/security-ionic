@@ -3,7 +3,12 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <label>บันทึกรถเข้าออก</label>
+        <label>บันทึกรถเข้าออก</label><br>
+        <!--
+        <div style="text-align: center;">
+            <label style="bottom: 0px;position: absolute;">{{name_enterprise}}</label>
+        </div>
+        -->
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
@@ -34,15 +39,24 @@
     </ion-item>
     <ion-row style="text-align: center;">
         <ion-col size="6">
-            <img src="/assets/img/car_bg_text.png" (click)="save_car()">
+            <div class="ion-activatable">
+                <img src="/assets/img/car_bg_text.png" (click)="save_car()">
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
         </ion-col>
         <ion-col size="6">
-            <img src="/assets/img/bike_bg_text.png" (click)="save_bike()">
+            <div class="ion-activatable">
+                <img src="/assets/img/bike_bg_text.png" (click)="save_bike()">
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
         </ion-col>
         <ion-col size="3">
         </ion-col>
         <ion-col size="6">
-            <img src="/assets/img/delivery_bg_text.png" (click)="save_special()">
+            <div class="ion-activatable">
+                <img src="/assets/img/delivery_bg_text.png" (click)="save_special()">
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
         </ion-col>
         <ion-col size="3">
         </ion-col>
@@ -54,28 +68,28 @@
         <h5>รถที่ยังอยู่ภายในโครงการ</h5>
     </font>
     <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [columns]="columns" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [limit]="10" style="margin-top:10px;" [scrollbarH]="true">
-        <ngx-datatable-column name="licenseplate" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="licenseplate" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ทะเบียนรถ</span>
                 </div>
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="cartype" [width]="105" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="cartype" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ชนิดรถ</span>
                 </div>
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="status" [width]="80" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="status" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>สถานะ</span>
                 </div>
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="description" [width]="115" [resizeable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="description" [resizeable]="false" [canAutoResize]="false">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ห้อง/ยูนิตที่มาพบ</span>
@@ -89,7 +103,7 @@
                 </div>
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="time" [width]="230" [resizeable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="time" [resizeable]="false" [canAutoResize]="false">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ระยะเวลา</span>

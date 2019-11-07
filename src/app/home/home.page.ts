@@ -37,6 +37,12 @@ export class HomePage {
   isItemAvailable:any;
   items:any;
   array = [];
+  name_enterprise:any; 
+  
+  public enableSound = true;
+  private clickSound = new Audio("data:audio/mpeg;base64,//sQxAAAA+i5OrQRABC9mG+3BCAACCAH/f//yE5z0Od/yf//ITnO853/O9CEIygAgEPg+8AAUWCwVioVCAEBgAAD/65xat0KnkqrfOEKkxfjOI6H//Ofpf/q8jZTBgc8uM4jcsMMMMH/+xLEAgAE6M1XGCKAAAAANIOAAAQIAADL6BfAW9DeJCI78xlb/EWEVL/6REV//0Uw0SMb//AY4ypMQU1FMy45OS4zqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqo="
+  );
+  public soundEnabled = true;
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
@@ -46,6 +52,10 @@ export class HomePage {
       this.getInout(val);
       this.val = val;
         this.getResident(val);
+    });
+    this.storage.get('name_enterprise').then((val) => {
+      this.name_enterprise = val;
+      console.log('Your name_enterprise is', val);
     });
     this.isItemAvailable = false; // initialize the items with false
   }
@@ -251,6 +261,7 @@ export class HomePage {
   }
 
 save_car(){
+  this.clickSound.play();
     if(this.lecenseplate == null || this.description == null || this.inout == null){
       this.ErrorAlert();
     }else{
@@ -297,6 +308,7 @@ save_car(){
   }
    
 save_bike(){
+  this.clickSound.play();
     if(this.lecenseplate == null || this.description == null || this.inout == null){
       this.ErrorAlert();
     }else{
@@ -344,6 +356,7 @@ save_bike(){
 
    
 save_special(){
+  this.clickSound.play();
     if(this.lecenseplate == null || this.description == null || this.inout == null){
       this.ErrorAlert();
     }else{

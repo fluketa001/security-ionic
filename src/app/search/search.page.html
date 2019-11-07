@@ -4,6 +4,10 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <label>ค้นหาข้อมูล</label>
+        <div style="position: absolute;right: 10px;top:7px;">
+            <label>{{date}}</label><br>
+            <label>{{time}}</label>
+        </div>
     </ion-toolbar>
     <ion-searchbar padding placeholder="ทะเบียนรถ/ชื่อ-สกุล/บ้านเลขที่/เลขยูนิต/เบอร์โทร" style="margin-bottom:10px;position: absolute;z-index: 999;margin-top:-40px;" (keyup)='filterDatatable($event)'></ion-searchbar>
 </ion-header>

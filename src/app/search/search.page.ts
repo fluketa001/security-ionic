@@ -19,12 +19,17 @@ export class SearchPage implements OnInit {
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   resident = [];
+  date:any;
+  time:any;
 
   constructor(private storage: Storage, public alertController: AlertController,private http: Http, private callNumber: CallNumber) {
     this.storage.get('key').then((val) => {
       console.log('Your key is', val);
         this.getResident(val);
     });
+    setInterval(() => {
+      this.getTime();
+    }, 1000);
    }
 
   tel(number){
@@ -40,6 +45,30 @@ export class SearchPage implements OnInit {
       this.rows = data;
       console.log(this.rows);
     });*/
+  }
+  
+
+  getTime(){
+    //this.time = new Date();
+    //this.date = date("H:i:s",date);
+    let now = new Date();
+
+    var thday = new Array ("อาทิตย์","จันทร์",
+    "อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์");
+    var thmonth = new Array ("ม.ค.","ก.พ.","มี.ค.",
+    "เม.ย.","พ.ค.","มิ.ย.", "ก.ค.","ส.ค.","ก.ย.",
+    "ต.ค.","พ.ศ.","ธ.ค.");
+    //thday[now.getDay()]
+    this.date = ("วันที่ "+ now.getDate()+ " " + thmonth[now.getMonth()]+ " " + (0+now.getFullYear()+543));
+
+    let hour = now.getHours();
+    let min=now.getMinutes();
+    let sec =now.getSeconds();
+
+    if (hour>24) { hour=hour-24; }
+    else { hour=hour; }
+
+    this.time = "เวลา "+((hour<=9) ? "0"+hour : hour) + ":" + ((min<=9) ? "0"+min:min) + ":"+ ((sec<=9) ? "0"+ sec:sec);
   }
 
   getResident(val){

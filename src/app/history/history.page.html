@@ -4,8 +4,12 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <label>ประวัติการจอดรถ</label>
+        <div style="position: absolute;right: 10px;top:7px;">
+            <label>{{date_now}}</label><br>
+            <label>{{time}}</label>
+        </div>
     </ion-toolbar>
-    <ion-item style="margin-bottom:30px;padding-left:15px;padding-right:15px;z-index: 999;margin-top:-40px;background: url(/assets/img/p2.jpg) no-repeat center center fixed;">
+    <ion-item style="margin-bottom:30px;padding-left:15px;padding-right:15px;z-index: 999;margin-top:-30px;background: url(/assets/img/p2.jpg) no-repeat center center fixed;">
         <ion-label>ค้นหาข้อมูลโดย</ion-label>
         <ion-select [(ngModel)]="select" (ionChange)="onChange()">
             <ion-select-option value="smart" selected>Smart Search</ion-select-option>

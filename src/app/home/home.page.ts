@@ -5,7 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Http,ResponseOptions,Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
-import { map } from 'rxjs/operators';
+import { map, reduce } from 'rxjs/operators';
 import {Observable, of, empty} from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
@@ -38,6 +38,9 @@ export class HomePage {
   items:any;
   array = [];
   name_enterprise:any; 
+  date:any;
+  time:any;
+
   
   public enableSound = true;
   private clickSound = new Audio("data:audio/mpeg;base64,//sQxAAAA+i5OrQRABC9mG+3BCAACCAH/f//yE5z0Od/yf//ITnO853/O9CEIygAgEPg+8AAUWCwVioVCAEBgAAD/65xat0KnkqrfOEKkxfjOI6H//Ofpf/q8jZTBgc8uM4jcsMMMMH/+xLEAgAE6M1XGCKAAAAANIOAAAQIAADL6BfAW9DeJCI78xlb/EWEVL/6REV//0Uw0SMb//AY4ypMQU1FMy45OS4zqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqo="
@@ -58,6 +61,32 @@ export class HomePage {
       console.log('Your name_enterprise is', val);
     });
     this.isItemAvailable = false; // initialize the items with false
+    setInterval(() => {
+      this.getTime();
+    }, 1000);
+  }
+
+  getTime(){
+    //this.time = new Date();
+    //this.date = date("H:i:s",date);
+    let now = new Date();
+
+    var thday = new Array ("อาทิตย์","จันทร์",
+    "อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์");
+    var thmonth = new Array ("ม.ค.","ก.พ.","มี.ค.",
+    "เม.ย.","พ.ค.","มิ.ย.", "ก.ค.","ส.ค.","ก.ย.",
+    "ต.ค.","พ.ศ.","ธ.ค.");
+    //thday[now.getDay()]
+    this.date = ("วันที่ "+ now.getDate()+ " " + thmonth[now.getMonth()]+ " " + (0+now.getFullYear()+543));
+
+    let hour = now.getHours();
+    let min=now.getMinutes();
+    let sec =now.getSeconds();
+
+    if (hour>24) { hour=hour-24; }
+    else { hour=hour; }
+
+    this.time = "เวลา "+((hour<=9) ? "0"+hour : hour) + ":" + ((min<=9) ? "0"+min:min) + ":"+ ((sec<=9) ? "0"+ sec:sec);
   }
 
   getAutoComplete(val){
@@ -404,9 +433,12 @@ save_special(){
   
   async ErrorAlert() {
     const alert = await this.alertController.create({
-      header: 'ข้อผิดพลาด!',
       message: 'กรุณาป้อนข้อมูลให้ครบ',
-      buttons: ['OK']
+      cssClass: 'alert-danger',
+      buttons: [
+        {
+          text: 'ตกลง'
+        }]
     });
 
     await alert.present();
@@ -414,9 +446,12 @@ save_special(){
 
   async SuccessAlert() {
     const alert = await this.alertController.create({
-      header: 'สำเร็จ',
       message: 'บันทึกข้อมูลสำเร็จ',
-      buttons: ['OK']
+      cssClass: 'alert-success',
+      buttons: [
+        {
+          text: 'ตกลง'
+        }]
     });
 
     await alert.present();

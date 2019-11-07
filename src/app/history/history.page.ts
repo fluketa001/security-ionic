@@ -19,6 +19,9 @@ export class HistoryPage implements OnInit {
   select:any = "smart";
   changedate:any;
   val:any;
+
+  date_now:any;
+  time:any;
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
@@ -31,9 +34,35 @@ export class HistoryPage implements OnInit {
         this.val = val;
         this.getInout_all(val);
     });
+    setInterval(() => {
+      this.getTime();
+    }, 1000);
   }
 
   ngOnInit() {
+  }
+
+  getTime(){
+    //this.time = new Date();
+    //this.date = date("H:i:s",date);
+    let now = new Date();
+
+    var thday = new Array ("อาทิตย์","จันทร์",
+    "อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์");
+    var thmonth = new Array ("ม.ค.","ก.พ.","มี.ค.",
+    "เม.ย.","พ.ค.","มิ.ย.", "ก.ค.","ส.ค.","ก.ย.",
+    "ต.ค.","พ.ศ.","ธ.ค.");
+    //thday[now.getDay()]
+    this.date_now = ("วันที่ "+ now.getDate()+ " " + thmonth[now.getMonth()]+ " " + (0+now.getFullYear()+543));
+
+    let hour = now.getHours();
+    let min=now.getMinutes();
+    let sec =now.getSeconds();
+
+    if (hour>24) { hour=hour-24; }
+    else { hour=hour; }
+
+    this.time = "เวลา "+((hour<=9) ? "0"+hour : hour) + ":" + ((min<=9) ? "0"+min:min) + ":"+ ((sec<=9) ? "0"+ sec:sec);
   }
 
   onChange(){

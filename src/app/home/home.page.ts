@@ -41,6 +41,8 @@ export class HomePage {
   date:any;
   time:any;
 
+  count:any;
+
   
   public enableSound = true;
   private clickSound = new Audio("data:audio/mpeg;base64,//sQxAAAA+i5OrQRABC9mG+3BCAACCAH/f//yE5z0Od/yf//ITnO853/O9CEIygAgEPg+8AAUWCwVioVCAEBgAAD/65xat0KnkqrfOEKkxfjOI6H//Ofpf/q8jZTBgc8uM4jcsMMMMH/+xLEAgAE6M1XGCKAAAAANIOAAAQIAADL6BfAW9DeJCI78xlb/EWEVL/6REV//0Uw0SMb//AY4ypMQU1FMy45OS4zqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqo="
@@ -75,7 +77,7 @@ export class HomePage {
     "อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์");
     var thmonth = new Array ("ม.ค.","ก.พ.","มี.ค.",
     "เม.ย.","พ.ค.","มิ.ย.", "ก.ค.","ส.ค.","ก.ย.",
-    "ต.ค.","พ.ศ.","ธ.ค.");
+    "ต.ค.","พ.ย.","ธ.ค.");
     //thday[now.getDay()]
     this.date = ("วันที่ "+ now.getDate()+ " " + thmonth[now.getMonth()]+ " " + (0+now.getFullYear()+543));
 
@@ -115,6 +117,7 @@ export class HomePage {
       if(data){
         this.dataIn = data.json()[0].dbresult;
         this.rows = data.json()[0].dbresult;
+        this.count = this.rows.length;
         //redirect page
         //this.router.navigateByUrl('/select', data.json()[1].dbresult[0].id);
         //this.router.navigate(['select'], data.json()[1].dbresult[0].id);

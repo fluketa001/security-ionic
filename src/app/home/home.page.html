@@ -69,7 +69,7 @@
     <hr>
 
     <font align="center">
-        <h5>รถที่ยังอยู่ภายในโครงการ</h5>
+        <h5>รถที่ยังอยู่ภายในโครงการ {{count}} คัน</h5>
     </font>
     <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [columns]="columns" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [limit]="10" style="margin-top:10px;" [scrollbarH]="true">
         <ngx-datatable-column name="licenseplate" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
@@ -107,7 +107,7 @@
                 </div>
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="time" [resizeable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="time" [resizeable]="true" [canAutoResize]="true">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ระยะเวลา</span>
@@ -121,6 +121,19 @@
                 </ng-template>
             </ngx-datatable-column>
         </div>
+
+        <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+                <div style="padding: 5px 10px">
+                    <div>
+                        <!--Showing {{(offset * pageSize)+1}} ถึง {{(rowCount> (curPage*pageSize))?(curPage*pageSize):(rowCount)}}ทั้งหมดรวม-->{{(rowCount)}} คัน
+                    </div>
+                </div>
+                <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="rowCount" [hidden]="!((rowCount / pageSize) > 1)"
+                    (change)="table.onFooterPage($event)">
+                </datatable-pager>
+            </ng-template>
+        </ngx-datatable-footer>
     </ngx-datatable>
 
 </ion-content>

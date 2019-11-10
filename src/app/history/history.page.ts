@@ -4,6 +4,9 @@ import { Http,ResponseOptions,Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
+import { ModalController } from '@ionic/angular';
+
+import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 @Component({
   selector: 'app-history',
   templateUrl: './history.page.html',
@@ -17,16 +20,20 @@ export class HistoryPage implements OnInit {
   date:any;
   smart:any;
   select:any = "smart";
-  changedate:any;
+  //changedate:any;
   val:any;
 
   date_now:any;
   time:any;
+
+  
+  datePickerObj: any = {};
+  selectedDate;
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   inout_all = [];
-  constructor(private storage: Storage, public alertController: AlertController,private http: Http) {
+  constructor(public modalCtrl: ModalController,private storage: Storage, public alertController: AlertController,private http: Http) {
     this.smart = null;
     this.date = "true";
     this.storage.get('key').then((val) => {
@@ -40,6 +47,33 @@ export class HistoryPage implements OnInit {
   }
 
   ngOnInit() {
+    this.datePickerObj = {
+      setLabel: 'เลือก',  // default 'Set'
+      todayLabel: 'วันนี้', // default 'Today'
+      closeLabel: 'ปิด',
+      monthsList: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
+      weeksList: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"],
+      dateFormat: 'DD-MM-YYYY',
+      inputDate: new Date()
+    };
+  }
+  
+  async openDatePicker() {
+    const datePickerModal = await this.modalCtrl.create({
+      component: Ionic4DatepickerModule,
+      cssClass: 'li-ionic4-datePicker',
+      componentProps: { 
+         'objConfig': this.datePickerObj, 
+         'selectedDate': this.selectedDate 
+      }
+    });
+    await datePickerModal.present();
+ 
+    datePickerModal.onDidDismiss()
+      .then((data) => {
+        console.log(data);
+        this.selectedDate = data.data.date;
+      });
   }
 
   getTime(){
@@ -51,7 +85,7 @@ export class HistoryPage implements OnInit {
     "อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์");
     var thmonth = new Array ("ม.ค.","ก.พ.","มี.ค.",
     "เม.ย.","พ.ค.","มิ.ย.", "ก.ค.","ส.ค.","ก.ย.",
-    "ต.ค.","พ.ศ.","ธ.ค.");
+    "ต.ค.","พ.ย.","ธ.ค.");
     //thday[now.getDay()]
     this.date_now = ("วันที่ "+ now.getDate()+ " " + thmonth[now.getMonth()]+ " " + (0+now.getFullYear()+543));
 
@@ -74,20 +108,21 @@ export class HistoryPage implements OnInit {
     }else{
       this.smart = "true";
       this.date = null;
-      this.changedate = null;
+      this.selectedDate = null;
       this.rows = [];
       console.log(this.date);
     }
   }
 
-  onChangeDate(changedate){
-    console.log(moment(changedate).format('DD-MM-YYYY'));
-    const val = moment(changedate).format('DD-MM-YYYY');
+  onChangeDate(selectedDate){
+    const val = moment(selectedDate).format('MM-DD-YY');
+    console.log(val);
 
     // filter our data
     const inout_all = this.inout_all.filter(function(d) {
       return d.carin.toLowerCase().indexOf(val) !== -1 || !val || d.carout.toLowerCase().indexOf(val) !== -1 || d.description.toLowerCase().indexOf(val) !== -1 || d.licenseplate.toLowerCase().indexOf(val) !== -1;
     });
+    console.log(this.inout_all);
 
     // update the rows
     this.rows = inout_all;

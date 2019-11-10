@@ -19,7 +19,9 @@
     <ion-searchbar padding placeholder="ทะเบียนรถ/ชื่อ-สกุล/บ้านเลขที่/เลขยูนิต/เบอร์โทร" style="margin-bottom:10px;position: absolute;z-index: 999;margin-top:-40px;" (keyup)='filterDatatable($event)' [hidden]="smart"></ion-searchbar>
     <ion-item style="margin-top:-30px;padding-left:15px;padding-right:15px;" [hidden]="date">
         <ion-label>เลือกวันที่</ion-label>
-        <ion-datetime displayFormat="DD-MM-YYYY" placeholder="Select Date" [(ngModel)]="changedate" (ionChange)="onChangeDate(changedate)"></ion-datetime>
+        <!--<ion-datetime displayFormat="DD-MM-YYYY" placeholder="Select Date" [(ngModel)]="changedate" (ionChange)="onChangeDate(changedate)"></ion-datetime>-->
+        <!--<ionic-calendar-date-picker (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>-->
+        <ion-input style="text-align: right;right: 15px;" readonly [(ngModel)]="selectedDate" [liIonic4Datepicker]="datePickerObj" (ionChange)="onChangeDate(selectedDate)" placeholder="คลิกเลือก"></ion-input>
     </ion-item>
 </ion-header>
 <ion-content padding>
@@ -29,20 +31,20 @@
   <div align="center">
       <label style="color: white;">ผลการค้นหา</label>
   </div>-->
-    <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
+    <ngx-datatable #table class="material striped" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
         <ngx-datatable-column name="ทะเบียนรถ" [width]="130" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.licenseplate}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="cartype" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="cartype">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>ชนิดรถ</span>
                 </div>
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="status" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ngx-datatable-column name="status" [resizeable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template ngx-datatable-header-template>
                 <div style="text-align: center;">
                     <span>สถานะ</span>
@@ -64,5 +66,17 @@
                 {{row.carout}}
             </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+                <div style="padding: 5px 10px">
+                    <div>
+                        <!--Showing {{(offset * pageSize)+1}} ถึง {{(rowCount> (curPage*pageSize))?(curPage*pageSize):(rowCount)}}ทั้งหมดรวม-->{{(rowCount)}} คัน
+                    </div>
+                </div>
+                <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="rowCount" [hidden]="!((rowCount / pageSize) > 1)"
+                    (change)="table.onFooterPage($event)">
+                </datatable-pager>
+            </ng-template>
+        </ngx-datatable-footer>
     </ngx-datatable>
 </ion-content>

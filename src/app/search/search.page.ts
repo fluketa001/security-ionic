@@ -57,7 +57,7 @@ export class SearchPage implements OnInit {
     "อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์");
     var thmonth = new Array ("ม.ค.","ก.พ.","มี.ค.",
     "เม.ย.","พ.ค.","มิ.ย.", "ก.ค.","ส.ค.","ก.ย.",
-    "ต.ค.","พ.ศ.","ธ.ค.");
+    "ต.ค.","พ.ย.","ธ.ค.");
     //thday[now.getDay()]
     this.date = ("วันที่ "+ now.getDate()+ " " + thmonth[now.getMonth()]+ " " + (0+now.getFullYear()+543));
 

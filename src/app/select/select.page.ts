@@ -34,7 +34,7 @@ export class SelectPage implements OnInit {
       let headers = new Headers({'Content-Type':'application/json'});
       let options = new ResponseOptions({headers:headers});
       let body = {id:this.id};   
-      this.http.post('https://edmkk.com/service/getEnterprise.php',body,options)
+      this.http.post('https://twelfth-guard.site/service/getEnterprise.php',body,options)
       .subscribe(data=>{
         this.items = data.json()[0].dbresult;
         console.log(this.items[0]);

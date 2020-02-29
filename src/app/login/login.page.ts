@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {username:this.username,pass:this.pass};   
-    this.http.post('https://edmkk.com/service/getLogin.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getLogin.php',body,options)
     .subscribe(data=>{
       console.log(data.json()[0].apistatus);
       if(data.json()[0].apistatus=="1"){

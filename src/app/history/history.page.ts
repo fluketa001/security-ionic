@@ -134,7 +134,7 @@ export class HistoryPage implements OnInit {
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {enterprise_id:val};   
-    this.http.post('https://edmkk.com/service/getInout_all.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getInout_all.php',body,options)
     .subscribe(data=>{
       if(data.json()[0]){
         this.inout_all = data.json()[0].dbresult;

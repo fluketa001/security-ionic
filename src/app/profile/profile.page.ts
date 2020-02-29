@@ -51,7 +51,7 @@ export class ProfilePage {
       let headers = new Headers({'Content-Type':'application/json'});
       let options = new ResponseOptions({headers:headers});
       let body = {id:this.id,name:this.name,telephone:this.telephone,address:this.address,picture:this.picture};   
-      this.http.post('https://edmkk.com/service/editProfile.php',body,options)
+      this.http.post('https://twelfth-guard.site/service/editProfile.php',body,options)
       .subscribe(data=>{
         console.log(data);
         if(data.json()[0].apistatus=="1"){
@@ -101,7 +101,7 @@ export class ProfilePage {
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {id:this.id};   
-    this.http.post('https://edmkk.com/service/getUser.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getUser.php',body,options)
     .subscribe(data=>{
       if(data.json()[0].apistatus=="1"){
         // set a key/value

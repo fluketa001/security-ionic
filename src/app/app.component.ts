@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { MenuController } from '@ionic/angular';
 declare var nativeclick;
 @Component({
   selector: 'app-root',
@@ -41,7 +42,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    public menuCtrl: MenuController
   ) {
     this.initializeApp();
     this.storage.get('name_enterprise').then((val) => {
@@ -86,9 +88,16 @@ export class AppComponent {
       this.storage.clear();
 
       //redirect page
-      this.router.navigate(['login']);
+      //this.router.navigate(['login']);
+      //this.router.navigate(['login'],{skipLocationChange: true});
+      //this.router.navigateByUrl('/login');
+      //window.location.reload();
   }
 
+
+  btnClose(){
+    this.menuCtrl.toggle();
+  }
 
   change(){
     //redirect page

@@ -12,6 +12,7 @@ import { Http,ResponseOptions,Headers, HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   providers: [
     StatusBar,
     Keyboard,
+    SocialSharing,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CallNumber

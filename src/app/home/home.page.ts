@@ -3,11 +3,12 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Http,ResponseOptions,Headers } from '@angular/http';
-import { AlertController } from '@ionic/angular';
+import { AlertController,ModalController } from '@ionic/angular';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { map, reduce } from 'rxjs/operators';
 import {Observable, of, empty} from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { ReportModalPage } from '../report-modal/report-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +52,7 @@ export class HomePage {
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  constructor(private storage: Storage, private router: Router, public alertController: AlertController,private http: Http, public keyboard : Keyboard) {
+  constructor(public modalController: ModalController,private storage: Storage, private router: Router, public alertController: AlertController,private http: Http, public keyboard : Keyboard) {
     this.storage.get('key').then((val) => {
       console.log('Your key is', val);
       this.getInout(val);
@@ -66,6 +67,13 @@ export class HomePage {
     setInterval(() => {
       this.getTime();
     }, 1000);
+  }
+  
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ReportModalPage
+    });
+    return await modal.present();
   }
 
   getTime(){
@@ -95,7 +103,7 @@ export class HomePage {
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {enterprise_id:val};   
-    this.http.post('https://edmkk.com/service/getAutoComplete.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getAutoComplete.php',body,options)
     .subscribe(data=>{
       if(data.json()[0]){
         this.autocomplete = data.json()[0].dbresult;
@@ -111,7 +119,7 @@ export class HomePage {
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {enterprise_id:val};   
-    this.http.post('https://edmkk.com/service/getInout.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getInout.php',body,options)
     .subscribe(data=>{
       console.log(data.json()[0].dbresult);
       if(data){
@@ -138,7 +146,7 @@ export class HomePage {
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {enterprise_id:val};   
-    this.http.post('https://edmkk.com/service/getResident.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getResident.php',body,options)
     .subscribe(data=>{
       if(data.json()[0]){
         this.resident = data.json()[0].dbresult;
@@ -301,7 +309,7 @@ save_car(){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
         let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val,status:this.status,car_type:'รถยนต์'};   
-        this.http.post('https://edmkk.com/service/saveInout.php',body,options)
+        this.http.post('https://twelfth-guard.site/service/saveInout.php',body,options)
         .subscribe(data=>{
           if(data){
             this.SuccessAlert();
@@ -320,7 +328,7 @@ save_car(){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
         let body = {id:this.dataid};   
-        this.http.post('https://edmkk.com/service/updateInout.php',body,options)
+        this.http.post('https://twelfth-guard.site/service/updateInout.php',body,options)
         .subscribe(data=>{
           if(data){
             this.SuccessAlert();
@@ -348,7 +356,7 @@ save_bike(){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
         let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val,status:this.status,car_type:'รถจักรยานยนต์'};   
-        this.http.post('https://edmkk.com/service/saveInout.php',body,options)
+        this.http.post('https://twelfth-guard.site/service/saveInout.php',body,options)
         .subscribe(data=>{
           if(data){
             this.SuccessAlert();
@@ -367,7 +375,7 @@ save_bike(){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
         let body = {id:this.dataid};   
-        this.http.post('https://edmkk.com/service/updateInout.php',body,options)
+        this.http.post('https://twelfth-guard.site/service/updateInout.php',body,options)
         .subscribe(data=>{
           if(data){
             this.SuccessAlert();
@@ -396,7 +404,7 @@ save_special(){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
         let body = {lecense_plate:this.lecenseplate,description:this.description,inout:this.inout,enterprise_id:this.val,status:this.status,car_type:'รถบริการพิเศษ'};   
-        this.http.post('https://edmkk.com/service/saveInout.php',body,options)
+        this.http.post('https://twelfth-guard.site/service/saveInout.php',body,options)
         .subscribe(data=>{
           if(data){
             this.SuccessAlert();
@@ -415,7 +423,7 @@ save_special(){
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new ResponseOptions({headers:headers});
         let body = {id:this.dataid};   
-        this.http.post('https://edmkk.com/service/updateInout.php',body,options)
+        this.http.post('https://twelfth-guard.site/service/updateInout.php',body,options)
         .subscribe(data=>{
           if(data){
             this.SuccessAlert();

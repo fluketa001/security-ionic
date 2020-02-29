@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>ส่งรายงาน</ion-title>
+        <a><label style="position:absolute;right: 20px;top:20px;" (click)="dismiss()">ปิด</label></a>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label>วันที่เริ่ม</ion-label>
+        <ion-input style="text-align: right;right: 15px;" readonly [(ngModel)]="selectedDate" [liIonic4Datepicker]="datePickerObj" (ionChange)="check()" placeholder="คลิกเลือก"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>เวลาเริ่ม</ion-label>
+        <ion-datetime style="padding-right: 14px;" [(ngModel)]="selectedTime" pickerFormat="HH:mm" displayFormat="HH:mm" (ionChange)="time(selectedTime)" placeholder="คลิกเลือก"></ion-datetime>
+    </ion-item>
+    <hr>
+    <ion-item>
+        <ion-label>วันที่สิ้นสุด</ion-label>
+        <ion-input style="text-align: right;right: 15px;" readonly [(ngModel)]="selectedEndDate" [liIonic4Datepicker]="datePickerObj" (ionChange)="check2()" placeholder="คลิกเลือก"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>เวลาสิ้นสุด</ion-label>
+        <ion-datetime style="padding-right: 14px;" [(ngModel)]="selectedEndTime" displayFormat="HH:mm" (ionChange)="timeEnd(selectedEndTime)" placeholder="คลิกเลือก"></ion-datetime>
+    </ion-item>
+    <!--<ion-item>
+        <label>DD MMM YYYY H:mm</label>
+        <ion-datetime monthShortNames="ม.ต., ก.พ., มี.ค., เม.ย., พ.ค., มิ.ย., ก.ค., ส.ค., ก.ย., ต.ค., พ.ย., ธ.ค." displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+    </ion-item>-->
+    <div style="text-align: center;margin-top: 30px;">
+        <ion-button (click)="share()">ส่งรายงาน</ion-button>
+    </div>
+</ion-content>

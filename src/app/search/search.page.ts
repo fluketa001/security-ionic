@@ -1,4 +1,5 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit , ViewChild, Input} from '@angular/core';
+import { NavParams } from '@ionic/angular';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Http,ResponseOptions,Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
@@ -18,14 +19,14 @@ export class SearchPage implements OnInit {
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  resident = [];
+  residents = [];
   date:any;
   time:any;
 
   constructor(private storage: Storage, public alertController: AlertController,private http: Http, private callNumber: CallNumber) {
     this.storage.get('key').then((val) => {
       console.log('Your key is', val);
-        this.getResident(val);
+        this.getResidents(val);
     });
     setInterval(() => {
       this.getTime();
@@ -71,14 +72,14 @@ export class SearchPage implements OnInit {
     this.time = "เวลา "+((hour<=9) ? "0"+hour : hour) + ":" + ((min<=9) ? "0"+min:min) + ":"+ ((sec<=9) ? "0"+ sec:sec);
   }
 
-  getResident(val){
+  getResidents(val){
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new ResponseOptions({headers:headers});
     let body = {enterprise_id:val};   
-    this.http.post('https://edmkk.com/service/getResident.php',body,options)
+    this.http.post('https://twelfth-guard.site/service/getResidents.php',body,options)
     .subscribe(data=>{
       if(data.json()[0]){
-        this.resident = data.json()[0].dbresult;
+        this.residents = data.json()[0].dbresult;
         this.rows = data.json()[0].dbresult;
         console.log(data.json()[0].dbresult);
         //redirect page
@@ -87,7 +88,7 @@ export class SearchPage implements OnInit {
         
         //console.log("id"+data[1].dbresult[0].id);
       }else{
-        this.resident = [];
+        this.residents = [];
         console.log("not found");
         // ข้อความแจ้งเตือน
         //this.ErrorAlert();
@@ -113,12 +114,12 @@ export class SearchPage implements OnInit {
     const val = event.target.value.toLowerCase();
 
     // filter our data
-    const resident = this.resident.filter(function(d) {
+    const residents = this.residents.filter(function(d) {
       return d.name.toLowerCase().indexOf(val) !== -1 || !val || d.homenumber.toLowerCase().indexOf(val) !== -1 || d.telephone.toLowerCase().indexOf(val) !== -1 || d.licenseplate.toLowerCase().indexOf(val) !== -1;
     });
 
     // update the rows
-    this.rows = resident;
+    this.rows = residents;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
   }

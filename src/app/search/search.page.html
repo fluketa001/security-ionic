@@ -18,7 +18,7 @@
     <div align="center">
         <label style="color: white;">ผลการค้นหา</label>
     </div>-->
-    <ngx-datatable #table class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
+    <ngx-datatable #table class="material striped" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" offset="0" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="20" style="margin-top:10px;" [scrollbarH]="true">
         <ngx-datatable-column name="เบอร์โทร">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <a (click)="tel(row.telephone)">

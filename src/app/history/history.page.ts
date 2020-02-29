@@ -37,7 +37,7 @@ export class HistoryPage implements OnInit {
     this.smart = null;
     this.date = "true";
     this.storage.get('key').then((val) => {
-      console.log('Your key is', val);
+      //console.log('Your key is', val);
         this.val = val;
         this.getInout_all(val);
     });
@@ -71,7 +71,7 @@ export class HistoryPage implements OnInit {
  
     datePickerModal.onDidDismiss()
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         this.selectedDate = data.data.date;
       });
   }
@@ -104,25 +104,26 @@ export class HistoryPage implements OnInit {
       this.smart = null;
       this.date = "true";
       this.getInout_all(this.val);
-      console.log(this.smart);
+      //console.log(this.smart);
     }else{
       this.smart = "true";
       this.date = null;
       this.selectedDate = null;
       this.rows = [];
-      console.log(this.date);
+      //console.log(this.date);
     }
   }
 
   onChangeDate(selectedDate){
-    const val = moment(selectedDate).format('MM-DD-YY');
-    console.log(val);
+    const val = moment(selectedDate,'DD/MM/YYYY').format('DD-MM-YY');
+    //console.log(selectedDate);
+    //console.log(val);
 
     // filter our data
     const inout_all = this.inout_all.filter(function(d) {
       return d.carin.toLowerCase().indexOf(val) !== -1 || !val || d.carout.toLowerCase().indexOf(val) !== -1 || d.description.toLowerCase().indexOf(val) !== -1 || d.licenseplate.toLowerCase().indexOf(val) !== -1;
     });
-    console.log(this.inout_all);
+    //console.log(this.inout_all);
 
     // update the rows
     this.rows = inout_all;
@@ -139,7 +140,7 @@ export class HistoryPage implements OnInit {
       if(data.json()[0]){
         this.inout_all = data.json()[0].dbresult;
         this.rows = data.json()[0].dbresult;
-        console.log(data.json()[0].dbresult);
+        //console.log(data.json()[0].dbresult);
         //redirect page
         //this.router.navigateByUrl('/select', data.json()[1].dbresult[0].id);
         //this.router.navigate(['select'], data.json()[1].dbresult[0].id);
@@ -147,17 +148,17 @@ export class HistoryPage implements OnInit {
         //console.log("id"+data[1].dbresult[0].id);
       }else{
         this.inout_all = [];
-        console.log("not found");
+        //console.log("not found");
         // ข้อความแจ้งเตือน
         //this.ErrorAlert();
       }
     },error=>{
-      console.log("error");
+      //console.log("error");
     })
   }
 
   filterDatatable(event){
-    console.log(event);
+    //console.log(event);
     const val = event.target.value.toLowerCase();
 
     // filter our data

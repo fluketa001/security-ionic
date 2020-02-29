@@ -54,14 +54,14 @@ export class HomePage {
 
   constructor(public modalController: ModalController,private storage: Storage, private router: Router, public alertController: AlertController,private http: Http, public keyboard : Keyboard) {
     this.storage.get('key').then((val) => {
-      console.log('Your key is', val);
+      //console.log('Your key is', val);
       this.getInout(val);
       this.val = val;
         this.getResident(val);
     });
     this.storage.get('name_enterprise').then((val) => {
       this.name_enterprise = val;
-      console.log('Your name_enterprise is', val);
+      //console.log('Your name_enterprise is', val);
     });
     this.isItemAvailable = false; // initialize the items with false
     setInterval(() => {
@@ -111,7 +111,7 @@ export class HomePage {
         this.autocomplete = [];
       }
     },error=>{
-      console.log("error");
+      //console.log("error");
     })
   }
 
@@ -121,7 +121,7 @@ export class HomePage {
     let body = {enterprise_id:val};   
     this.http.post('https://twelfth-guard.site/service/getInout.php',body,options)
     .subscribe(data=>{
-      console.log(data.json()[0].dbresult);
+      //console.log(data.json()[0].dbresult);
       if(data){
         this.dataIn = data.json()[0].dbresult;
         this.rows = data.json()[0].dbresult;
@@ -133,12 +133,12 @@ export class HomePage {
         //console.log("id"+data[1].dbresult[0].id);
       }else{
         this.dataIn = [];
-        console.log("not found");
+        //console.log("not found");
         // ข้อความแจ้งเตือน
         //this.ErrorAlert();
       }
     },error=>{
-      console.log("error");
+      //console.log("error");
     })
   }
 
@@ -150,7 +150,7 @@ export class HomePage {
     .subscribe(data=>{
       if(data.json()[0]){
         this.resident = data.json()[0].dbresult;
-        console.log(data.json()[0].dbresult);
+        //console.log(data.json()[0].dbresult);
         //redirect page
         //this.router.navigateByUrl('/select', data.json()[1].dbresult[0].id);
         //this.router.navigate(['select'], data.json()[1].dbresult[0].id);
@@ -158,12 +158,12 @@ export class HomePage {
         //console.log("id"+data[1].dbresult[0].id);
       }else{
         this.resident = [];
-        console.log("not found");
+        //console.log("not found");
         // ข้อความแจ้งเตือน
         //this.ErrorAlert();
       }
     },error=>{
-      console.log("error");
+      //console.log("error");
     })
   }
 
@@ -187,7 +187,7 @@ export class HomePage {
       return e.licenseplate.toLowerCase().indexOf(val) !== -1 || !val;
     });
 
-    console.log(resident);
+    //console.log(resident);
     if(resident > []){
       this.chkRes(resident,val);
     }
@@ -322,7 +322,7 @@ save_car(){
             //this.ErrorAlert();
           }
         },error=>{
-          console.log("error");
+          //console.log("error");
         })
       }else{
         let headers = new Headers({'Content-Type':'application/json'});
@@ -341,7 +341,7 @@ save_car(){
             //this.ErrorAlert();
           }
         },error=>{
-          console.log("error");
+          //console.log("error");
         })        
       }
     }
@@ -369,7 +369,7 @@ save_bike(){
             //this.ErrorAlert();
           }
         },error=>{
-          console.log("error");
+          //console.log("error");
         })
       }else{
         let headers = new Headers({'Content-Type':'application/json'});
@@ -388,7 +388,7 @@ save_bike(){
             //this.ErrorAlert();
           }
         },error=>{
-          console.log("error");
+          //console.log("error");
         })        
       }
     }
@@ -417,7 +417,7 @@ save_special(){
             //this.ErrorAlert();
           }
         },error=>{
-          console.log("error");
+          //console.log("error");
         })
       }else{
         let headers = new Headers({'Content-Type':'application/json'});
@@ -436,7 +436,7 @@ save_special(){
             //this.ErrorAlert();
           }
         },error=>{
-          console.log("error");
+          //console.log("error");
         })        
       }
     }

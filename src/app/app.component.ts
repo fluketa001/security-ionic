@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -36,6 +36,7 @@ export class AppComponent {
   status:any;
   gender:any;
   picture:any;
+  public counter=0;
 
   constructor(
     private platform: Platform,
@@ -43,7 +44,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private router: Router,
     private storage: Storage,
-    public menuCtrl: MenuController
+    public menuCtrl: MenuController,
+    private toastCtrl: ToastController
   ) {
     this.initializeApp();
     this.storage.get('name_enterprise').then((val) => {
@@ -81,7 +83,26 @@ export class AppComponent {
         var clickyClasses = ['button', 'a']; // add other classes that should make a sound when clicked on
         nativeclick.watch(clickyClasses);
       }
+
+      this.platform.backButton.subscribe(() =>{
+        if (this.counter == 0){
+            this.counter++;
+            this.presentToast();
+            setTimeout(() => { this.counter = 0 }, 3000)
+        }else{
+          navigator['app'].exitApp();
+        }
+      })
     });
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: "กดอีกครั้งเพื่อออกจากแอปพลิเคชัน",
+      duration: 3000,
+      position: "middle"
+    });
+    toast.present();
   }
 
   logout(){

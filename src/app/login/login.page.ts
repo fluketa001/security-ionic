@@ -31,6 +31,19 @@ export class LoginPage implements OnInit {
     })*/
 
   ngOnInit() {
+    this.storage.get('username').then((val) => {
+      if(val != null){
+        this.username = val;
+      }
+      console.log('Your key is', val);
+    });
+    this.storage.get('password').then((val) => {
+      if(val != null){
+        this.pass = val;
+        this.login()
+      }
+      console.log('Your key is', val);
+    });
   }
   
   login(){
@@ -48,6 +61,9 @@ export class LoginPage implements OnInit {
         console.log(data.json()[1].dbresult[0].status);
         
         // set a key/value
+        this.storage.set('username', data.json()[1].dbresult[0].username);
+        this.storage.set('password', data.json()[1].dbresult[0].password);
+
         this.storage.set('id', data.json()[1].dbresult[0].id);
         this.storage.set('name', data.json()[1].dbresult[0].name);
         this.storage.set('telephone', data.json()[1].dbresult[0].telephone);

@@ -19,7 +19,7 @@ export class ReportModalPage implements OnInit {
 
   TimeChk;
 
-  selectedEndDate = ("0" + new Date().getDate()).slice(-2) +'-'+(new Date().getMonth()+1) +'-'+(new Date().getFullYear());
+  selectedEndDate = ("0" + new Date().getDate()).slice(-2) +'-'+("0" + (new Date().getMonth() + 1)).slice(-2) +'-'+(new Date().getFullYear());
   selectedEndTime = moment(new Date().toISOString()).format("HH:mm");
 
   Date;
@@ -42,21 +42,21 @@ export class ReportModalPage implements OnInit {
           var startdate = new Date(date.setDate(date.getDate() - 1));
           console.log(startdate.getDate());
           var sdate = startdate.getDate();
-          this.selectedDate = ("0" + sdate).slice(-2) +'-'+(new Date().getMonth()) +'-'+(new Date().getFullYear());
+          this.selectedDate = ("0" + sdate).slice(-2) +'-'+("0" + (new Date().getMonth() + 1)).slice(-2) +'-'+(new Date().getFullYear());
           //this.selectedDate = (new Date().getDate()) +'-'+(new Date().getMonth()+1) +'-'+(new Date().getFullYear());
         }else{
           var sdate = (new Date().getDate()-1);
-          this.selectedDate = ("0" + sdate).slice(-2) +'-'+(new Date().getMonth()+1) +'-'+(new Date().getFullYear());
+          this.selectedDate = ("0" + sdate).slice(-2) +'-'+("0" + (new Date().getMonth() + 1)).slice(-2) +'-'+(new Date().getFullYear());
         }
         console.log("เย็น");
       }else{
         console.log("ค่ำ");
         var sdate = (new Date().getDate());
-        this.selectedDate = ("0" + sdate).slice(-2) +'-'+(new Date().getMonth()+1) +'-'+(new Date().getFullYear());
+        this.selectedDate = ("0" + sdate).slice(-2) +'-'+("0" + (new Date().getMonth() + 1)).slice(-2) +'-'+(new Date().getFullYear());
       }
     }else{
       this.selectedTime = "06:00";
-      this.selectedDate = (new Date().getDate()) +'-'+(new Date().getMonth()+1) +'-'+(new Date().getFullYear());
+      this.selectedDate = (new Date().getDate()) +'-'+("0" + (new Date().getMonth() + 1)).slice(-2) +'-'+(new Date().getFullYear());
       console.log("เข้า");
     }
     this.datePickerObj = {
